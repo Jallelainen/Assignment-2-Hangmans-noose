@@ -53,9 +53,28 @@ namespace Assignment_2_Hangmans_noose
         {
             string WhatType = "What kind of guess would you like to make?";
             string GuessType = "A letter (1)\nA word (2)";
-            
-            
-            Console.WriteLine(WordGenerator());
+            string NotValidInput = "That is not a valid input. Please try again.";
+            //string mysteryword = WordGenerator();
+            double userInput;
+
+            //Console.WriteLine(mysteryword);
+            WriteLine(WhatType);
+            WriteLine(GuessType);
+            userInput = Console.ReadLine();
+
+            switch (userInput)
+            {
+                case 1:
+                    AskForLetter();
+                    break;
+                case 2:
+                    AskForWord();
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    WriteLine(NotValidInput);
+                    break;
+            }
         }
 
         static string AskForWord()
@@ -82,7 +101,9 @@ namespace Assignment_2_Hangmans_noose
 
         static string WordGenerator()
         {
+            Random random = new Random();
             string[] wordArray = new string[10];
+            string mysteryWord = random.Next().ToString();
 
             wordArray[1] = "potery";
             wordArray[2] = "cooperation";
@@ -94,9 +115,8 @@ namespace Assignment_2_Hangmans_noose
             wordArray[8] = "intention";
             wordArray[9] = "patient";
             wordArray[10] = "bark";
-            Random randomWord = new Random();
-            var idx = randomWord.Next(0, 9);
-            string mysteryWord = wordArray[idx];
+
+           
 
 
             /* wordArray[2, 1] = "belly";
@@ -117,5 +137,6 @@ namespace Assignment_2_Hangmans_noose
         {
             Console.WriteLine(text);
         }
+
     }
 }
