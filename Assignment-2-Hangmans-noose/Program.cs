@@ -68,98 +68,59 @@ namespace Assignment_2_Hangmans_noose
             var randomNumber = random.Next(0, 9);
             string mysteryWord = wordArray[randomNumber];
 
-            for(var i = 0; i <mysteryWord.Length; i++) 
-            {
-                Console.Write("_ ");
-            }
             return mysteryWord;
 
         }
         static void StartGame()
         {
-            string WhatType = "What kind of guess would you like to make?";
-            string GuessType = "A letter (1)\nA word (2)";
+            string WhatType = "What would you like to guess? ";
             string NotValidInput = "That is not a valid input. Please try again.";
-            string mysteryWord = (WordGenerator());
-            double userInput;
+            StringBuilder guessedLetters = new StringBuilder();
+            StringBuilder mysteryWord = (HideWord());
+
+            Console.Clear();
+            Console.WriteLine(mysteryWord);
+            WriteLine(WhatType);
+            char playerGuess = char.Parse(Console.ReadLine());
+        
             string[] wordLength = new string[mysteryWord.Length];
-            
-            /*WriteLine(WhatType);
-            WriteLine(GuessType);
-            userInput = Int32.Parse(Console.ReadLine());
-
-            switch (userInput)
+            string stringGuess = playerGuess.ToString();
+            for (int j = 0; j < mysteryWord.Length; j++)
             {
-                case 1:
-                    AskForLetter();
-                    break;
-                case 2:
-                    AskForWord();
-                    break;
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    WriteLine(NotValidInput);
-                    break;
-            }*/
-            // Here starts the loop
-            for (int p = 0; p < mysteryWord.Length; p++)
-            {
-                wordLength[p] = "_ ";
-            }
-
-            while (true)
-            {
-                StringBuilder guessedLetters = new StringBuilder();
-                char playerGuess = char.Parse(Console.ReadLine());
-                for (int j = 0; j < mysteryWord.Length; j++)
+                if (playerGuess == mysteryWord[j])
                 {
-                    if (playerGuess == mysteryWord[j])
-                    {
-                        wordLength[j] = playerGuess;
+                        wordLength[j] = stringGuess;
 
                     Console.Write(wordLength[j] + " ");
 
-                    }
+                }
 
-                    else
+                    else if (playerGuess != mysteryWord[j])
                     {
-                        guessedLetters.ToString().Contains(playerGuess);
+                        guessedLetters.Append(playerGuess);
                         Console.WriteLine(guessedLetters);
                     }
 
-                }
-                
             }
-
-
-        }
-
-        static string AskForWord()
-        {
-            string guessString = Console.ReadLine();
-
-            return guessString;
-        }
-
-        static void AskForLetter()
-        {
-            StringBuilder guessLetter = new StringBuilder();
-
-            string EnterGuess = "Please enter which letter you would like to guess: ";
-
+                
             
 
 
-            WriteLine(EnterGuess);
-            char userInput = Console.ReadKey().KeyChar;
-
-            guessLetter.ToString().Contains(userInput);
-
-
-            //return guessChar;
         }
 
-        
+        static StringBuilder HideWord()
+        {
+            string mysteryWord = (WordGenerator());
+            StringBuilder guessLetter = new StringBuilder();
+
+            for (var i = 0; i <mysteryWord.Length; i++) 
+            {
+                guessLetter.Append("_ ");
+            }
+
+            return guessLetter;
+
+        }
 
         public static void WriteLine(string text)
         {
