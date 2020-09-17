@@ -14,8 +14,7 @@ namespace Assignment_2_Hangmans_noose
              bool keepLooping = true;
              while (keepLooping)
              {
-                 try
-                 {
+                
 
                      WriteLine(MenuItems);
                      var choice = int.Parse(Console.ReadLine() ?? "");
@@ -36,8 +35,8 @@ namespace Assignment_2_Hangmans_noose
                      WriteLine(AnyKey);
                      Console.ReadKey();
                      Console.Clear();
-                 }
-                 catch
+                 
+                 /*catch
                  {
                      Console.ForegroundColor = ConsoleColor.Red;
                      WriteLine(NotValidInput);
@@ -45,7 +44,7 @@ namespace Assignment_2_Hangmans_noose
                      WriteLine(AnyKey);
                      Console.ReadKey();
                      Console.Clear();
-                 }
+                 }*/
              }
          
 
@@ -76,51 +75,70 @@ namespace Assignment_2_Hangmans_noose
         {
             string WhatType = "\nWhat would you like to guess? ";
             string NotValidInput = "That is not a valid input. Please try again.";
-            StringBuilder guessedLetters = new StringBuilder();
-            StringBuilder mysteryWord = (HideWord());
-            char[] rightGuess = new char[mysteryWord.Length];
+            StringBuilder wrongLetters = new StringBuilder();
+            string theWord = WordGenerator();
+            StringBuilder mysteryWord = (HideWord(theWord));
+            char[] rightGuess = new char[theWord.Length];
 
             
             char playerGuess;
-            for (int i = 9; i > 0; i--)
+            for (int i = 9; i > 0; i--)//Lives loop
             {
                 
-                Console.Clear();
+               // Console.Clear();
                 Console.WriteLine("You have {0} lives left", i + 1);
-                Console.WriteLine("Your guesses:" + guessedLetters);
+                Console.WriteLine("Your guesses:" + wrongLetters);
                 Console.WriteLine(mysteryWord);
                 WriteLine(WhatType);
 
                 string[] wordLength = new string[mysteryWord.Length];
-                playerGuess = char.Parse(Console.ReadLine());
-                string stringGuess = playerGuess.ToString();
-                for (int j = 0; j < mysteryWord.Length; j++)
+
+                string playerGuess1 = Console.ReadLine();
+                Console.WriteLine("sdfdsfdsdfdsf" + playerGuess1.Length);
+                if(playerGuess1.Length == 1)
+                {
+                playerGuess = char.Parse(playerGuess1);
+                // playerGuess = char.Parse(Console.ReadLine());
+                
+                string stringPlayerGuess = playerGuess.ToString();
+                for (int j = 0; j < theWord.Length; j++)
                 {
                 
-                    if (playerGuess == mysteryWord[j])
+                    if (playerGuess == theWord[j])
                     {
-                        wordLength[j] = stringGuess;
-                        stringGuess.ToCharArray();
-
+                        wordLength[j] = stringPlayerGuess;
+                        rightGuess[j] = playerGuess;
+                    }
+                    else if (playerGuess.ToString() == theWord)
+                    {
+                        Console.WriteLine("you won biatch");
                     }
 
                 }
-                guessedLetters.Append(stringGuess);
+                wrongLetters.Append(stringPlayerGuess);
                
+
+                }
+                else if (playerGuess1.Length > 1)
+                {
+                    Console.WriteLine("whaaat");
+                }
             }
+            Console.WriteLine("you lost suckah");
         }
 
-        static StringBuilder HideWord()
+        static StringBuilder HideWord(string mysteryWord)
         {
-            string mysteryWord = (WordGenerator());
-            StringBuilder guessedLetter = new StringBuilder();
+            
+            StringBuilder hiddenWord = new StringBuilder();
 
             for (var i = 0; i <mysteryWord.Length; i++) 
             {
-                guessedLetter.Append("_ ");
+                hiddenWord.Append("_ ");
             }
 
-            return guessedLetter;
+            return hiddenWord;
+      
 
         }
 
