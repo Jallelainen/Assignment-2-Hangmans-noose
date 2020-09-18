@@ -82,8 +82,7 @@ namespace Assignment_2_Hangmans_noose
                 PrintRightGuesses(rightGuess); // calls method to display the hidden word. Will insert right guesses in right place.
                 WriteLine(WhatType);
 
-                //string[] wordLength = new string[theWord.Length]; //creates new string array the length of the word.
-                if (i > 0)
+                if (i > 0) // if index is bigger than 0, keeps looping
                 {
 
                     string playerGuess1 = Console.ReadLine(); // user inputs guess, gets assigned to variable.
@@ -134,13 +133,13 @@ namespace Assignment_2_Hangmans_noose
                     }
 
                 }
-                else if (i == 0)
+                else if (i == 0) // if index equal to 0 = losing condition.
                 {
                     Console.Clear();
                     Console.WriteLine("|-|-|THE GAME|-|-|\nYou just lost it...");
                     break;
                 }
-                Console.WriteLine("Hit any key to continue");
+                Console.WriteLine("Hit any key to continue"); //pauses progress to prevent clear console to wipe out info.
                 Console.ReadKey(true);
             }
 
@@ -148,11 +147,11 @@ namespace Assignment_2_Hangmans_noose
 
         }
 
-        static void InitUnderscore(char[] hiddenWord) //
+        static void InitUnderscore(char[] hiddenWord) // transforms the word to underscores
         {
-            for (int i = 0; i < hiddenWord.Length; i++)
+            for (int i = 0; i < hiddenWord.Length; i++) // loops as long as the word
             {
-                hiddenWord[i] = '_';
+                hiddenWord[i] = '_'; // replaces the letter in specific iteration with underscore
             }
         }
 
