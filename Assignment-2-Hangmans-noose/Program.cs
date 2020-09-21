@@ -92,7 +92,7 @@ namespace Assignment_2_Hangmans_noose
                         if (wrongLetters.ToString().Contains(playerGuess1) || Array.IndexOf(rightGuess, playerGuess1) >= 0) //if user guess already exists in the wrong or right guesses.(compares to stringbuilder and array)
                         {
                             i++; // adds a iteration (life) to the for-loop.
-                            Console.WriteLine("you already guessed that");
+                            Console.WriteLine("You've already guessed that, please try again.");
                         }
                         else if (theWord.Contains(playerGuess1)) //if the word contains the users guess.
                         {
@@ -157,7 +157,7 @@ namespace Assignment_2_Hangmans_noose
 
         static void PrintRightGuesses(char[] rightGuess)
         {
-            for (int i = 0; i < rightGuess.Length; i++)
+            for (int i = 0; i < rightGuess.Length; i++) 
             {
                 Console.Write(rightGuess[i] + " ");
             }
